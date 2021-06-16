@@ -1,0 +1,57 @@
+Rutas para Tareas
+- /addTask Metodo Post
+    agregar tareas a la base de datos
+        
+        parametros{
+        nombre 
+        id 
+        fecha de inicio
+        fecha final 
+        status
+        descripcion
+        id_usuario
+
+        }
+
+- /deleteTask   Metodo Delete
+    Eliminado fisico en la base datos 
+    parametros{
+        nombre
+    }
+
+- /updateTask   Metodo Put  
+    Actulizar informacion como el nombre,fecha inicio/fin, descripcion
+    parametros{
+        nombre
+        fecha inicio
+        fecha fin, 
+        descripcion
+
+    }
+
+- /completeTask   Metodo Put
+    Eliminado logico cuando cuando una tarea se complete
+
+    "DELETE FROM task WHERE nombre = nombre;"
+    
+    parametros{
+        status = completado
+    }
+
+- /Task Metodo GET
+Traer todas las tareas incompletas para mostrar en pantalla 
+    parametros{
+        "SELECT * from task WHERE status = "incompleto"
+    }
+
+- /TaskComplete GET
+    Traer todas las tareas completas para mostrar en otra pantalla  
+ parametros{
+        "SELECT * from task WHERE status = "completos"
+    }
+    
+    
+    
+    UPDATE nombre_tabla SET status = "sdasdas" WHERE nombre = nombre;
+
+
