@@ -1,22 +1,23 @@
 const Dal = require("../TaskDal");
 
 
-const deleteTask = async (title) => {
+const deleteTask = async (id_task,id) => {
 let response = {};
 let status = 500;
 let Task;
 
 try {
     
-    Task= await Dal.query("SELECT title FROM task WHERE title=?",
-        [title
+    Task= await Dal.query("SELECT * FROM tasks WHERE id_task = ? and users_id_user = ?",
+        [id_task, id
         ]);
 
-
+ console.log(Task);
 } catch (error) {
    
+    // console.log("fdf");
     response = {
-        message: "Ha ocurrido un error  ",
+        message: "Ha ocurrido un error ",
         data: null,
     };
     status = 500;
@@ -27,15 +28,18 @@ try {
 
 }
 
+var {title} = Task;
+console.log(Task.title);
 
 if (Task?.length) {
     try {
         const result = await Dal.query(
-            "DELETE FROM task WHERE title = ?",
-            [title]
+            "DELETE FROM tasks WHERE id_task = ? and users_id_user = ?",
+            [id_task,id]
         );
+        console.log(result);
         response = {
-            message:`La tarea ${title} se elimino correctamente.`,
+            message:`La tarea  se elimino correctamente.`,
             data: null,
             
             
@@ -51,7 +55,7 @@ if (Task?.length) {
     }
 }else{
     response = {
-        message: `La tarea ${title} no existe.`,
+        message: `La tarea no existe`,
         data: null,
     };
     status = 400;

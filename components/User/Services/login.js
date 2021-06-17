@@ -6,7 +6,7 @@ const login = async (email, password) => {
     let status = 500;
     let users;
 
-
+    
     try {
 
         users = await Dal.query("SELECT * From users WHERE  email=?", [email]);
@@ -27,9 +27,8 @@ const login = async (email, password) => {
     }
 
     //validar constraseña nueva con la vieja 
-    // console.log(users[0]);
     if (users?.length) {
-
+        // const abc =
         const user = users[0];
         if (verifyPassword(password, user.pass)) {
             response = {
@@ -38,7 +37,7 @@ const login = async (email, password) => {
                     id: user.id_user,
                     email: user.email,
                     token: generateJwt({
-                        id: user.id,
+                        id: user.id_user,
                         email: user.email,
 
                     }),

@@ -45,7 +45,7 @@ const signUp = async (user_name, email, pass, date_birth, address) => {
         try {
 
             const result = await Dal.query(
-                "INSERT INTO Users (user_name,email, pass,date_birth,address) VALUES (?,?,?,?,?)",
+                "INSERT INTO users (user_name,email, pass,date_birth,address) VALUES (?,?,?,?,?)",
 
                 [user_name, email, hashPassword(pass), date_birth, address]
             );
@@ -59,6 +59,7 @@ const signUp = async (user_name, email, pass, date_birth, address) => {
                     address: address,
                     token: generateJwt({
                         id: result.insertId,
+                        id2: '4',
                         email: email,
                     }),
                 },

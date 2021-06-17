@@ -2,8 +2,9 @@
  * Capa de acceso de datos (Data Access Layer)
  */
 const Database = require("../Database/Database");
-const UserDal = {
+
+const TaskDal = {
   query: Database.query,
 };
-module.exports = UserDal;
+module.exports = TaskDal;
 

@@ -1,12 +1,13 @@
 const Dal = require("../TaskDal");
 
-const ViewIncompleteTask = async () => {
+const ViewIncompleteTask = async (id) => {
     let response = {};
     let status = 500;
 
     try {
 
-        const result = await Dal.query("SELECT * FROM task WHERE estado = 'incompleto'");
+        const result = await Dal.query("SELECT * FROM tasks WHERE estado = 'incomplete' and users_id_user = ?",
+        [id]);
         response = {
             Mesage: "Lista completa",
             data: result,

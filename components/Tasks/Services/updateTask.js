@@ -1,15 +1,16 @@
 const Dal = require("../TaskDal");
 
-const updateTask = async (title, descript, start_date, end_date, estado, users_id_user) => {
+const updateTask = async (id_task,title, descript, start_date, end_date, estado,id) => {
     let response = {};
     let status = 500;
     let Task;
 
 
     try {
-        Task = await Dal.query("SELECT title FROM task WHERE title=?",
-            [title
+        Task = await Dal.query("SELECT * FROM tasks WHERE id_task =? and users_id_user =? ",
+            [id_task, id
             ]);
+            console.log(Task);
     } catch (error) {
 
         console.log(error)
@@ -27,8 +28,8 @@ const updateTask = async (title, descript, start_date, end_date, estado, users_i
 
     if (Task?.length) {
         try {
-            const result = await Dal.query("UPDATE task set title =? , descript =? , start_date =?, end_date=?, estado =?, users_id_user=? where title =?",
-            [ title, descript, start_date, end_date, estado, users_id_user, title] 
+            const result = await Dal.query("UPDATE tasks set title =? , descript =? , start_date =?, end_date=?, estado =? where id_task =?",
+            [ title, descript, start_date, end_date, estado,id_task] 
         );
 
             response = {
@@ -39,7 +40,7 @@ const updateTask = async (title, descript, start_date, end_date, estado, users_i
                     start_date: start_date,
                     end_date: end_date,
                     estado: estado,
-                    users_id_user: users_id_user,
+                   
                 },
             };
             status = 200;

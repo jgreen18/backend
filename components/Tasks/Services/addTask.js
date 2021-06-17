@@ -3,14 +3,14 @@ const Dal = require("../TaskDal");
 
 
 
-const addTask = async (title, descript, start_date, end_date, estado, users_id_user) => {
+const addTask = async (title, descript, start_date, end_date, estado ,id) => {
     let response = {};
     let status = 500;
     let duplicateTask = null;
 
     try {
-        duplicateTask = await Dal.query("SELECT title FROM task WHERE title=?",
-            [title
+        duplicateTask = await Dal.query("SELECT * FROM tasks WHERE title = ? and users_id_user = ?",
+            [title, id 
             ]);
 
 
@@ -30,8 +30,8 @@ const addTask = async (title, descript, start_date, end_date, estado, users_id_u
     if (duplicateTask?.length === 0) {
         try {
             const result = await Dal.query(
-                "INSERT INTO task (title, descript, start_date, end_date, estado, users_id_user) VALUES (?,?,?,?,?,?)",
-                [title, descript, start_date, end_date, estado, users_id_user]
+                "INSERT INTO tasks (title, descript, start_date, end_date, estado, Users_id_user) VALUES (?,?,?,?,?,?)",
+                [title, descript, start_date, end_date, estado, id]
             );
             response = {
                 message: "Registro de tarea realizado correctamente",
@@ -41,7 +41,7 @@ const addTask = async (title, descript, start_date, end_date, estado, users_id_u
                     start_date: start_date,
                     end_date: end_date,
                     estado: estado,
-                    users_id_user: users_id_user,
+                    users_id_user: id,
                 },
             };
             status = 200;

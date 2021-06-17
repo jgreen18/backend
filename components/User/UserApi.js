@@ -10,7 +10,6 @@ const Dal = require("./UserDal");
 const User = express.Router();
 
 
-
 //configuracion de express
 
 User.use(express.urlencoded({ extended: true }));
@@ -24,7 +23,7 @@ User.get("/all", async (req, res) => {
   try {
    
 
-    const result = await Dal.query("SELECT id_user, email FROM Users");
+    const result = await Dal.query("SELECT id_user, email FROM users");
     res.status(200).json({
       message: result,
     });

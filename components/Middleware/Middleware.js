@@ -8,6 +8,9 @@ const Middleware = (req, res, next) => {
 
         const jwtData = verifyJwt(req.headers.authorization);
         req.jwtData = jwtData;
+       
+
+      
         next();
     } catch (error) {
         res.status(401).json({
